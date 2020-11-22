@@ -15,7 +15,7 @@ struct TrainNode {
 		*departT;//время отправления
 
 	int
-		*num,//
+		*num,//Номер поезда (не зависит от станции)
 		*railwayNum;//
 	
 	string *trainType;//
