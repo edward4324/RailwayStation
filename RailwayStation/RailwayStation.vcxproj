@@ -139,11 +139,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ElectricTrain.cpp" />
+    <ClCompile Include="FrieghtTrain.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PassengerTrain.cpp" />
+    <ClCompile Include="RStation.cpp" />
     <ClCompile Include="Time.cpp" />
     <ClCompile Include="Train.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ElectricTrain.h" />
+    <ClInclude Include="FrieghtTrain.h" />
+    <ClInclude Include="PassengerTrain.h" />
     <ClInclude Include="RStation.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Train.h" />

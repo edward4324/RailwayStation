@@ -6,7 +6,7 @@ using namespace std;
 
 class Train {
 
-public:
+protected:
 	string
 		* depart,//куда направляется
 		* arrival;//откуда прибывает
@@ -25,29 +25,11 @@ public:
 	//Train* nextEl;
 	//Train* prevEl;
 
+public:
+
 	Train();
 	Train(const Train& train);
 	~Train();
-
-	friend std::istream& operator>> (std::istream& in, Train& train);
-
-};
-
-class PassengerTrain : public Train {
-
-
-
-};
-
-class ElectricTrain : public Train {
-
-
-
-};
-
-class FrieghtTrain : public Train {
-
-
 
 };
 

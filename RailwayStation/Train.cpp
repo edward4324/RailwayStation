@@ -1,17 +1,5 @@
 #include "Train.h"
 
-std::istream& operator>>(std::istream& in, Train& train)
-{
-    
-    in >> *(train.depart);
-    in >> *(train.arrival);
-    in >> *(train.arrivalTime);
-    in >> *(train.departTime);
-
-    return in;
-
-}
-
 Train::Train()
 {
 
