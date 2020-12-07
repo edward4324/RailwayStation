@@ -15,6 +15,8 @@ public:
 	FrieghtTrain(const FrieghtTrain& train);
 	~FrieghtTrain();
 
+	bool operator>(const FrieghtTrain& train);
+
 	friend std::istream& operator>> (std::istream& in, FrieghtTrain& Ftrain);
 
 };

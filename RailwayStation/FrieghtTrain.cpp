@@ -69,3 +69,9 @@ FrieghtTrain::~FrieghtTrain()
     delete liftingCapacity;
 
 }
+
+bool FrieghtTrain::operator>(const FrieghtTrain& train)
+{
+    return
+        train.arrivalTime > arrivalTime;
+}

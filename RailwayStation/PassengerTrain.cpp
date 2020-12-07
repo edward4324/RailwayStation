@@ -73,3 +73,10 @@ PassengerTrain::~PassengerTrain()
     delete carriagesForAnimals;
 
 }
+
+bool PassengerTrain::operator>(const PassengerTrain& train)
+{
+    return
+        train.arrivalTime > arrivalTime;
+
+}

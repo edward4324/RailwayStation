@@ -68,3 +68,9 @@ ElectricTrain::~ElectricTrain()
    delete IsHigh_speed;
 
 }
+
+bool ElectricTrain::operator>(const ElectricTrain& train)
+{
+    return
+        train.arrivalTime > arrivalTime;
+}

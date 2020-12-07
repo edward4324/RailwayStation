@@ -11,10 +11,6 @@ protected:
 		* depart,//куда направляется
 		* arrival;//откуда прибывает
 
-	Time
-		* arrivalTime,//время прибытия
-		* departTime;//время отправления
-
 	int
 		* num,//Номер поезда
 		* railwayNum;//Номер пути (устанавливается программой автоматически)
@@ -27,8 +23,16 @@ protected:
 
 public:
 
+	Time
+		* arrivalTime,//время прибытия
+		* departTime;//время отправления
+
 	Train();
 	Train(const Train& train);
+
+	void setRWnum(int rwnum);
+	int getRWnum();
+
 	~Train();
 
 };

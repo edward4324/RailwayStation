@@ -27,6 +27,22 @@ Train::Train(const Train& train)
 
 }
 
+void Train::setRWnum(int rwnum)
+{
+
+   *railwayNum = rwnum;
+
+}
+
+int Train::getRWnum()
+{
+    if (railwayNum != nullptr)
+        return *railwayNum;
+    else
+        return 0;
+
+}
+
 Train::~Train()
 {
     //delete all strings
