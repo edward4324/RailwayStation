@@ -16,6 +16,21 @@ std::istream& operator>>(std::istream& in, FrieghtTrain& Ftrain)
     return in;
 }
 
+std::ostream& operator<<(std::ostream& out, const FrieghtTrain& Ftrain)
+{
+
+    out << "Поезд прибывает на путь номер: " << *Ftrain.railwayNum << endl;
+    out << "Время прибытия поезда: " << *Ftrain.arrivalTime << endl;
+    out << "Время отбытия поезда: " << *Ftrain.departTime << endl;
+    out << "Поезд следует по маршруту: " << endl;
+    out << *Ftrain.arrival << " - " << *Ftrain.depart << endl;
+    out << "Поезд перевозит: " << *Ftrain.cargo << endl;
+    out << "Тип вагонов поезда: " << *Ftrain.typeOfWagon << endl;
+    out << "Грузоподъемность поезда: " << *Ftrain.liftingCapacity << endl;
+
+    return out;
+}
+
 FrieghtTrain::FrieghtTrain()
 {
 
@@ -27,7 +42,6 @@ FrieghtTrain::FrieghtTrain()
     arrivalTime = new Time;
     departTime = new Time;
 
-    num = new int;
     railwayNum = new int;
 
     liftingCapacity = new double;  
@@ -45,7 +59,6 @@ FrieghtTrain::FrieghtTrain(const FrieghtTrain& train)
     arrivalTime = train.arrivalTime;
     departTime = train.departTime;
 
-    num = train.num;
     railwayNum = train.railwayNum;
 
     liftingCapacity = train.liftingCapacity;
@@ -63,7 +76,6 @@ FrieghtTrain::~FrieghtTrain()
     delete arrivalTime;
     delete departTime;
 
-    delete num;
     delete railwayNum;
 
     delete liftingCapacity;

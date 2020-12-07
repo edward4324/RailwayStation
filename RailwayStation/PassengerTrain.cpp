@@ -16,6 +16,26 @@ std::istream& operator>>(std::istream& in, PassengerTrain& Ptrain)
     return in;
 }
 
+std::ostream& operator<<(std::ostream& out, const PassengerTrain& Ptrain)
+{
+
+    out << "Поезд прибывает на путь номер: " << *Ptrain.railwayNum << endl;
+    out << "Время прибытия поезда: " << *Ptrain.arrivalTime << endl;
+    out << "Время отбытия поезда: " << *Ptrain.departTime << endl;
+    out << "Поезд следует по маршруту: " << endl;
+    out << *Ptrain.arrival << " - " << *Ptrain.depart << endl;
+    out << "Количество пассажиров в поезде: " << *Ptrain.passengerNum << endl;
+    out << "Перевозить в животных в вагонах поезда: " 
+         << (*Ptrain.carriagesForAnimals? "разрешенно" : "запрещено") << endl;
+    out << "Вагон - ресторан в поезде "
+         << (*Ptrain.restourant? "есть" : "отсутствует") << endl;
+    out << "В поезде купейные вагоны " 
+         << (*Ptrain.coupe? "есть" : "отсутствуют") << endl;
+
+    return out;
+
+}
+
 PassengerTrain::PassengerTrain()
 {
 
@@ -25,7 +45,6 @@ PassengerTrain::PassengerTrain()
     arrivalTime = new Time;
     departTime = new Time;
 
-    num = new int;
     railwayNum = new int;
 
     passengerNum = new int;
@@ -43,7 +62,6 @@ PassengerTrain::PassengerTrain(const PassengerTrain& train)
 
     arrivalTime = train.arrivalTime;
     departTime = train.departTime;
-    num = train.num;
     railwayNum = train.railwayNum;
 
     passengerNum = train.passengerNum;
@@ -64,7 +82,6 @@ PassengerTrain::~PassengerTrain()
     delete arrivalTime;
     delete departTime;
     //delete all ints
-    delete num;
     delete railwayNum;
     delete passengerNum;
     //delete all bools

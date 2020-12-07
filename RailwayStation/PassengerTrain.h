@@ -19,5 +19,6 @@ public:
 	bool operator>(const PassengerTrain& train);
 
 	friend std::istream& operator>> (std::istream& in, PassengerTrain& Ptrain);
+	friend std::ostream& operator<< (std::ostream& out,const PassengerTrain& Ptrain);
 
 };

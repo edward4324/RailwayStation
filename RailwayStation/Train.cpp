@@ -9,7 +9,6 @@ Train::Train()
     arrivalTime = new Time;
     departTime = new Time;
 
-    num = new int;
     railwayNum = new int;
 
 }
@@ -22,7 +21,6 @@ Train::Train(const Train& train)
 
     arrivalTime = train.arrivalTime;
     departTime = train.departTime;
-    num = train.num;
     railwayNum = train.railwayNum;
 
 }
@@ -52,7 +50,6 @@ Train::~Train()
     delete arrivalTime;
     delete departTime;
     //delete all ints
-    delete num;
     delete railwayNum;
 
 }

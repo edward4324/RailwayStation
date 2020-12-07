@@ -15,13 +15,7 @@ int main() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	/*Time lunch;
-
-	cout << "Введите время для обеда:";
-	cin >> lunch;
-
-	cout << "Обед будет в " << lunch;*/
-
+	
 
 	return 0;
 

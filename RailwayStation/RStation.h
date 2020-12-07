@@ -26,7 +26,6 @@ private:
 	vector<PassengerTrain>* Ptrain;
 	vector<ElectricTrain>* Etrain;
 	vector<FrieghtTrain>* Ftrain;
-	int checkRW[10];
 
 	void distribRW();
 	//функции сортировки
@@ -40,13 +39,13 @@ public:
 	//доделать конструкторы класса
 	RailwayStation();
 	RailwayStation(const RailwayStation& station);
-	~RailwayStation();
+	~RailwayStation(); 
 
 	void getDataFromFile(string FileName);	
+	bool comparator(Time t1, Time t2);
 	
 	friend std::istream& operator>>(std::istream& in, RailwayStation& station);
-
-	bool comparator(Time t1, Time t2);
+	friend std::ostream& operator<<(std::ostream& out, const RailwayStation& station);
 
 };
 

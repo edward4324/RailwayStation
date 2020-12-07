@@ -15,6 +15,23 @@ std::istream& operator>>(std::istream& in, ElectricTrain& Etrain)
     return in;
 }
 
+std::ostream& operator<<(std::ostream& out, const ElectricTrain& Etrain)
+{
+
+    out << "Поезд прибывает на путь номер: " << *Etrain.railwayNum << endl;
+    out << "Время прибытия поезда: " << *Etrain.arrivalTime << endl;
+    out << "Время отбытия поезда: " << *Etrain.departTime << endl;
+    out << "Поезд следует по маршруту: " << endl;
+    out << *Etrain.arrival << " - " << *Etrain.depart << endl;
+    out << "Количество остановок: " << *Etrain.numOfStops << endl;
+    out << "Количество пассажиров в поезде: " << *Etrain.passengerNum << endl;
+    out << "Поезд высокоскоростной: "
+        << (*Etrain.IsHigh_speed ? "да" : "нет") << endl;
+   
+
+    return out;
+}
+
 ElectricTrain::ElectricTrain()
 {
 
@@ -24,7 +41,6 @@ ElectricTrain::ElectricTrain()
     arrivalTime = new Time;
     departTime = new Time;
 
-    num = new int;
     railwayNum = new int;
     passengerNum = new int;
     numOfStops = new int;
@@ -42,7 +58,6 @@ ElectricTrain::ElectricTrain(const ElectricTrain& train)
     arrivalTime = train.arrivalTime;
     departTime = train.departTime;
 
-    num = train.num;
     railwayNum = train.railwayNum;
     passengerNum = train.passengerNum;
     numOfStops = train.numOfStops;
@@ -60,7 +75,6 @@ ElectricTrain::~ElectricTrain()
    delete arrivalTime;
    delete departTime;
 
-   delete num;
    delete railwayNum;
    delete passengerNum;
    delete numOfStops;

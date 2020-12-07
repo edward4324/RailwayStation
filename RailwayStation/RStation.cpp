@@ -8,8 +8,6 @@ RailwayStation::RailwayStation()
 	Etrain = new vector<ElectricTrain>;
 	Ftrain = new vector<FrieghtTrain>;
 	
-	for (int i = 0; i < 10; i++)
-		checkRW[i] = 0;
 }
 
 RailwayStation::RailwayStation(const RailwayStation& station)
@@ -19,8 +17,6 @@ RailwayStation::RailwayStation(const RailwayStation& station)
 	*Etrain = *station.Etrain;
 	*Ftrain = *station.Ftrain;
 
-	for (int i = 0; i < 10; i++)
-		checkRW[i] = 0;
 }
 
 RailwayStation::~RailwayStation()
@@ -30,8 +26,6 @@ RailwayStation::~RailwayStation()
 	delete Etrain;
 	delete Ftrain;
 
-	for (int i = 0; i < 10; i++)
-		checkRW[i] = 0;
 }
 
 void RailwayStation::getDataFromFile(string FileName)
@@ -210,4 +204,26 @@ std::istream& operator>>(std::istream& in, RailwayStation& station)
 
 	return in;
 
+}
+
+std::ostream& operator<<(std::ostream& out, const RailwayStation& station)
+{
+	int pn, en, fn;
+	pn = station.Ptrain->size();
+	en = station.Etrain->size();
+	fn = station.Ftrain->size();
+
+	out << "Пассажирские поезда:" << endl;
+	for (int i = 0; i < pn; i++)
+		out << station.Ptrain->at(i);
+
+	out << "Поезда быстрого следования:" << endl;
+	for (int i = 0; i < pn; i++)
+		out << station.Etrain->at(i);
+
+	out << "Грузовые поезда:" << endl;
+	for (int i = 0; i < pn; i++)
+		out << station.Ftrain->at(i);
+
+	return out;
 }
