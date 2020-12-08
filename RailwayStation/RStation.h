@@ -21,8 +21,6 @@ private:
 	//3 - грузовой			//
 	//////////////////////////
 	//{ 1, 1, 1, 2, 2, 2, 3, 3, 3, 3 }
-	//доработать систему хранения данных
-	//сделать дополнительные методы классов для вывода информации и сбора этой-же информации
 	vector<PassengerTrain>* Ptrain;
 	vector<ElectricTrain>* Etrain;
 	vector<FrieghtTrain>* Ftrain;
@@ -32,6 +30,11 @@ private:
 	void Psort();
 	void Esort();
 	void Fsort();
+
+	void Pswap(PassengerTrain& p1, PassengerTrain& p2);
+	void Eswap(ElectricTrain& e1, ElectricTrain& e2);
+	void Fswap(FrieghtTrain& f1, FrieghtTrain& f2);
+
 	//функция для обращения к функциям сортировки
 	void sort_vectors();
 

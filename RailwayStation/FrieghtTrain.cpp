@@ -51,17 +51,17 @@ FrieghtTrain::FrieghtTrain()
 FrieghtTrain::FrieghtTrain(const FrieghtTrain& train)
 {
 
-    depart = train.depart;
-    arrival = train.arrival;
-    cargo = train.cargo;
-    typeOfWagon = train.typeOfWagon;
+    depart = new string(*train.depart);
+    arrival = new string(*train.arrival);
+    cargo = new string(*train.cargo);
+    typeOfWagon = new string(*train.typeOfWagon);
 
-    arrivalTime = train.arrivalTime;
-    departTime = train.departTime;
+    arrivalTime = new Time(*train.arrivalTime);
+    departTime = new Time(*train.departTime);
 
-    railwayNum = train.railwayNum;
+    railwayNum = new int(*train.railwayNum);
 
-    liftingCapacity = train.liftingCapacity;
+    liftingCapacity = new double(*train.liftingCapacity);
 
 }
 
@@ -86,4 +86,22 @@ bool FrieghtTrain::operator>(const FrieghtTrain& train)
 {
     return
         train.arrivalTime > arrivalTime;
+}
+
+FrieghtTrain& FrieghtTrain::operator=(const FrieghtTrain& obj)
+{
+    *depart = *obj.depart;
+    *arrival = *obj.arrival;
+
+    *arrivalTime = *obj.arrivalTime;
+    *departTime = *obj.departTime;
+
+    *railwayNum = *obj.railwayNum;
+
+    *cargo = *obj.cargo;
+    *typeOfWagon = *obj.typeOfWagon;
+    *liftingCapacity = *obj.liftingCapacity;
+
+    return *this;
+
 }

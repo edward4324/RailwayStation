@@ -16,6 +16,7 @@ public:
 	~FrieghtTrain();
 
 	bool operator>(const FrieghtTrain& train);
+	FrieghtTrain& operator=(const FrieghtTrain& obj);
 
 	friend std::istream& operator>> (std::istream& in, FrieghtTrain& Ftrain);
 	friend std::ostream& operator<< (std::ostream& out, const FrieghtTrain& Ftrain);

@@ -155,6 +155,10 @@
     <ClInclude Include="Time.h" />
     <ClInclude Include="Train.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="DB.txt" />
+    <Text Include="readme.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

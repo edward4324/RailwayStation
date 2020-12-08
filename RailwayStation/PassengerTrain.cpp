@@ -2,17 +2,16 @@
 
 std::istream& operator>>(std::istream& in, PassengerTrain& Ptrain)
 {
-
-    in >> *(Ptrain.passengerNum);
-    in >> *(Ptrain.coupe);
-    in >> *(Ptrain.restourant);
-    in >> *(Ptrain.carriagesForAnimals);
-
     in >> *(Ptrain.depart);
     in >> *(Ptrain.arrival);
     in >> *(Ptrain.arrivalTime);
     in >> *(Ptrain.departTime);
 
+    in >> *(Ptrain.passengerNum);
+    in >> *(Ptrain.coupe);
+    in >> *(Ptrain.restourant);
+    in >> *(Ptrain.carriagesForAnimals);
+     
     return in;
 }
 
@@ -57,18 +56,18 @@ PassengerTrain::PassengerTrain()
 PassengerTrain::PassengerTrain(const PassengerTrain& train)
 {
 
-    depart = train.depart;
-    arrival = train.arrival;
+    depart = new string(*train.depart);
+    arrival = new string(*train.arrival);
 
-    arrivalTime = train.arrivalTime;
-    departTime = train.departTime;
-    railwayNum = train.railwayNum;
+    arrivalTime = new Time(*train.arrivalTime);
+    departTime = new Time(*train.departTime);
+    railwayNum = new int(*train.railwayNum);
 
-    passengerNum = train.passengerNum;
+    passengerNum = new int(*train.passengerNum);
 
-    coupe = train.coupe;
-    restourant = train.restourant;
-    carriagesForAnimals = train.carriagesForAnimals;
+    coupe = new bool(*train.coupe);
+    restourant = new bool(*train.restourant);
+    carriagesForAnimals = new bool(*train.carriagesForAnimals);
 
 }
 
@@ -96,4 +95,23 @@ bool PassengerTrain::operator>(const PassengerTrain& train)
     return
         train.arrivalTime > arrivalTime;
 
+}
+
+PassengerTrain& PassengerTrain::operator=(const PassengerTrain& obj)
+{
+
+    *depart = *obj.depart;
+    *arrival = *obj.arrival;
+
+    *arrivalTime = *obj.arrivalTime;
+    *departTime = *obj.departTime;
+
+    *railwayNum = *obj.railwayNum;
+    *passengerNum = *obj.passengerNum;
+
+    *coupe = *obj.coupe;
+    *restourant = *obj.restourant;
+    *carriagesForAnimals = *obj.carriagesForAnimals;
+
+    return *this;
 }

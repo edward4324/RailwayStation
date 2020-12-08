@@ -19,8 +19,8 @@ Node::Node(int& hour_arg, int& min_arg)
 Node::Node(const Node& temp)
 {
 
-	hour = temp.hour;
-	min = temp.min;
+	hour = new int(*temp.hour);
+	min = new int(*temp.min);
 
 }
 
@@ -49,7 +49,7 @@ Time::Time(int& hour_arg, int& min_arg)
 Time::Time(const Time& temp)
 {
 
-	this->_time = new Node(*(temp._time->hour), *(temp._time->min));
+	_time = new Node(*temp._time);
 
 }
 
@@ -63,8 +63,8 @@ Time::~Time()
 Time& Time::operator=(const Time& tmp)
 {
 
-	_time->hour = tmp._time->hour;
-	_time->min = tmp._time->min;
+	*_time->hour = *tmp._time->hour;
+	*_time->min = *tmp._time->min;
 
 	return *this;
 
@@ -73,9 +73,9 @@ Time& Time::operator=(const Time& tmp)
 bool Time::operator<(const Time& tmp)
 {
 	return
-			_time->hour > tmp._time->hour
+			*_time->hour > *tmp._time->hour
 			||
-			_time->min > tmp._time->min;
+			*_time->min > *tmp._time->min;
 
 }
 
@@ -83,9 +83,9 @@ bool Time::operator>(const Time& tmp)
 {
 
 	return
-		_time->hour < tmp._time->hour
+		*_time->hour < *tmp._time->hour
 		||
-		_time->min < tmp._time->min;
+		*_time->min < *tmp._time->min;
 
 }
 
@@ -93,9 +93,9 @@ bool Time::operator==(const Time& tmp)
 {
 
 	return
-		_time->hour < tmp._time->hour
+		*_time->hour < *tmp._time->hour
 		&&
-		_time->min < tmp._time->min;
+		*_time->min < *tmp._time->min;
 
 }
 

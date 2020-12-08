@@ -13,9 +13,9 @@ RailwayStation::RailwayStation()
 RailwayStation::RailwayStation(const RailwayStation& station)
 {
 
-	*Ptrain = *station.Ptrain;
-	*Etrain = *station.Etrain;
-	*Ftrain = *station.Ftrain;
+	Ptrain = new vector<PassengerTrain>(*station.Ptrain);
+	Etrain = new vector<ElectricTrain>(*station.Etrain);
+	Ftrain = new vector<FrieghtTrain>(*station.Ftrain);
 
 }
 
@@ -52,53 +52,60 @@ void RailwayStation::distribRW()
 	j = Etrain->size();
 	k = Ftrain->size();
 
-	sort_vectors();
+	size_t it1 = 0;
 
-	//определение номера пути  по времени для пассажирских поездов
-	size_t it1 = 1;
-	//расставляем для первых трех поездов номера платформ в порядке возразстания, 
-	//чтобы основываясь на этом дальше работать с другими поездами
-	for (; it1 != PtrainRW; it1++)
-		Ptrain->at(it1).setRWnum(it1);
-	for (; it1 <= i; it1++) {		
-			if (Ptrain->at(it1).getRWnum() + 1 <= PtrainRW)
+	sort_vectors();
+	if (i > 1) {
+		//определение номера пути  по времени для пассажирских поездов
+		
+		//расставляем для первых трех поездов номера платформ в порядке возразстания, 
+		//чтобы основываясь на этом дальше работать с другими поездами
+		for (; it1 < PtrainRW; it1++)
+			Ptrain->at(it1).setRWnum(it1+1);
+		
+		for (; it1 < i; it1++) {
+			if (Ptrain->at(it1-1).getRWnum() + 1 <= PtrainRW)
 				//установим значение, прибавив к номеру пути пред. поезда единицу
-				Ptrain->at(it1).setRWnum(Ptrain->at(it1).getRWnum() + 1);
+				Ptrain->at(it1).setRWnum(Ptrain->at(it1-1).getRWnum() + 1);
 			else
 				//установим значение, вычислив максимальное количество пассажирских поездов из номера пути пред. поезда
-				Ptrain->at(it1).setRWnum(Ptrain->at(it1).getRWnum() - PtrainRW);
+				Ptrain->at(it1).setRWnum(Ptrain->at(it1-1).getRWnum() - PtrainRW + 1);
+		}
 	}
 
-	//определение номера пути  по времени для пассажирских поездов
-	it1 = PtrainRW + 1;
-	//расставляем для первых трех поездов номера платформ в порядке возразстания, 
-	//чтобы основываясь на этом дальше работать с другими поездами
-	for (; it1 != PtrainRW + EtrainRW; it1++)
-		Etrain->at(it1).setRWnum(it1);
-	for (; it1 <= i; it1++){
+	if (j > 1) {
+		//определение номера пути  по времени для пассажирских поездов
+		it1 = PtrainRW + 1;
+		//расставляем для первых трех поездов номера платформ в порядке возразстания, 
+		//чтобы основываясь на этом дальше работать с другими поездами
+		for (; it1 != PtrainRW + EtrainRW; it1++)
+			Etrain->at(it1).setRWnum(it1);
+		for (; it1 <= i; it1++) {
 			if (Etrain->at(it1).getRWnum() + 1 <= EtrainRW + PtrainRW)
 				//установим значение, прибавив к номеру пути пред. поезда единицу
 				Etrain->at(it1).setRWnum(Etrain->at(it1).getRWnum() + 1);
 			else
 				//установим значение, вычислив максимальное количество пассажирских поездов из номера пути пред. поезда
 				Etrain->at(it1).setRWnum(Etrain->at(it1).getRWnum() - EtrainRW);
+		}
 	}
 
-	//определение номера пути  по времени для грузовых поездов
-	it1 = PtrainRW + EtrainRW + 1;
-	//расставляем для первых трех поездов номера платформ в порядке возразстания, 
-	//чтобы основываясь на этом дальше работать с другими поездами
-	for (; it1 != FtrainRW + EtrainRW + PtrainRW; it1++)
-		Ftrain->at(it1).setRWnum(it1);
-	for (; it1 <= i; it1++) {
-		if (Ftrain->at(it1).getRWnum() + 1 <= FtrainRW + EtrainRW + PtrainRW)
+	if (k > 1) {
+		//определение номера пути  по времени для грузовых поездов
+		it1 = PtrainRW + EtrainRW + 1;
+		//расставляем для первых трех поездов номера платформ в порядке возразстания, 
+		//чтобы основываясь на этом дальше работать с другими поездами
+		for (; it1 != FtrainRW + EtrainRW + PtrainRW; it1++)
+			Ftrain->at(it1).setRWnum(it1);
+		for (; it1 <= i; it1++) {
+			if (Ftrain->at(it1).getRWnum() + 1 <= FtrainRW + EtrainRW + PtrainRW)
 				//установим значение, прибавив к номеру пути пред. поезда единицу
 				Ftrain->at(it1).setRWnum(Ftrain->at(it1).getRWnum() + 1);
 			else
 				//установим значение, вычислив максимальное количество пассажирских поездов из номера пути пред. поезда
 				Ftrain->at(it1).setRWnum(Ftrain->at(it1).getRWnum() - FtrainRW);
+		}
 	}
-
 }
 
 void RailwayStation::sort_vectors()
@@ -112,21 +119,26 @@ void RailwayStation::sort_vectors()
 
 void RailwayStation::Psort()
 {
-
+	//comparator(*Ptrain->at(j - 1).departTime, *Ptrain->at(j).arrivalTime)
+	//Pswap(Ptrain->at(j), Ptrain->at(j+1));
 	size_t n = Ptrain->size();
-
-	for (size_t i = 0; i < n; i++) {
-
-		for (size_t j = n - 1; j > i; j--) {
-
-			if (comparator(*Ptrain->at(j - 1).departTime, *Ptrain->at(j).arrivalTime)) {
-
-				swap(Ptrain->at(j - 1), Ptrain->at(j));
-
+	if (n != 0) {
+		size_t i, j;
+		bool swapped;
+		for (i = 0; i < n - 1; i++)
+		{
+			swapped = false;
+			for (j = 0; j < n - i - 1; j++)
+			{
+				if (comparator(*Ptrain->at(j).departTime, *Ptrain->at(j + 1).arrivalTime))
+				{
+					Pswap(Ptrain->at(j), Ptrain->at(j + 1));
+					swapped = true;
+				}
 			}
-
+			if (swapped == false)
+				break;
 		}
-
 	}
 
 }
@@ -134,39 +146,83 @@ void RailwayStation::Psort()
 void RailwayStation::Esort()
 {
 	size_t n = Etrain->size();
-
-	for (size_t i = 0; i < n; i++) {
-
-		for (size_t j = n - 1; j > i; j--) {
-
-			if (comparator(*Etrain->at(j - 1).departTime, *Etrain->at(j).arrivalTime)) {
-
-				swap(Etrain->at(j - 1), Etrain->at(j));
-
+	if (n != 0) {
+		size_t i, j;
+		bool swapped;
+		for (i = 0; i < n - 1; i++)
+		{
+			swapped = false;
+			for (j = 0; j < n - i - 1; j++)
+			{
+				if (comparator(*Etrain->at(j).departTime, *Etrain->at(j + 1).arrivalTime))
+				{
+					Eswap(Etrain->at(j), Etrain->at(j + 1));
+					swapped = true;
+				}
 			}
-
+			if (swapped == false)
+				break;
 		}
-
 	}
 }
 
 void RailwayStation::Fsort()
 {
 	size_t n = Ftrain->size();
-
-	for (size_t i = 0; i < n; i++) {
-
-		for (size_t j = n - 1; j > i; j--) {
-
-			if (comparator(*Ftrain->at(j - 1).departTime, *Ftrain->at(j).arrivalTime)) {
-
-				swap(Ftrain->at(j - 1), Ftrain->at(j));
-
+	if (n != 0) {
+		size_t i, j;
+		bool swapped;
+		for (i = 0; i < n - 1; i++)
+		{
+			swapped = false;
+			for (j = 0; j < n - i - 1; j++)
+			{
+				if (comparator(*Ftrain->at(j).departTime, *Ftrain->at(j + 1).arrivalTime))
+				{
+					Fswap(Ftrain->at(j), Ftrain->at(j + 1));
+					swapped = true;
+				}
 			}
-
+			if (swapped == false)
+				break;
 		}
-
 	}
+}
+
+void RailwayStation::Pswap(PassengerTrain& p1, PassengerTrain& p2)
+{
+
+	PassengerTrain temp;
+
+	temp = p1;
+	p1 = p2;
+	p2 = temp;
+
+
+}
+
+void RailwayStation::Eswap(ElectricTrain& e1, ElectricTrain& e2)
+{
+
+	ElectricTrain temp;
+
+	temp = e1;
+	e1 = e2;
+	e2 = temp;
+
+
+}
+
+void RailwayStation::Fswap(FrieghtTrain& f1, FrieghtTrain& f2)
+{
+
+	FrieghtTrain temp;
+
+	temp = f1;
+	f1 = f2;
+	f2 = temp;
+
+
 }
 
 bool RailwayStation::comparator(Time t1, Time t2)
@@ -213,17 +269,23 @@ std::ostream& operator<<(std::ostream& out, const RailwayStation& station)
 	en = station.Etrain->size();
 	fn = station.Ftrain->size();
 
-	out << "Пассажирские поезда:" << endl;
-	for (int i = 0; i < pn; i++)
-		out << station.Ptrain->at(i);
+	if (pn > 0) {
+		out << "Пассажирские поезда:" << endl;
+		for (int i = 0; i < pn; i++)
+			out << station.Ptrain->at(i);
+	}
 
-	out << "Поезда быстрого следования:" << endl;
-	for (int i = 0; i < pn; i++)
-		out << station.Etrain->at(i);
+	if (en > 0) {
+		out << "Поезда быстрого следования:" << endl;
+		for (int i = 0; i < en; i++)
+			out << station.Etrain->at(i);
+	}
 
-	out << "Грузовые поезда:" << endl;
-	for (int i = 0; i < pn; i++)
-		out << station.Ftrain->at(i);
+	if (fn > 0) {
+		out << "Грузовые поезда:" << endl;
+		for (int i = 0; i < fn; i++)
+			out << station.Ftrain->at(i);
+	}
 
 	return out;
 }

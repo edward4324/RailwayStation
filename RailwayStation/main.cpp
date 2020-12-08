@@ -15,7 +15,12 @@ int main() {
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	
+	RailwayStation station;
+
+	station.getDataFromFile("DB.txt");
+
+	cout << "Вывод данных о поездах:" << endl;
+	cout << station;
 
 	return 0;
 

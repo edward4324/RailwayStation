@@ -7,6 +7,7 @@ using namespace std;
 class Train {
 
 protected:
+
 	string
 		* depart,//куда направляется
 		* arrival;//откуда прибывает
@@ -26,9 +27,7 @@ public:
 		* arrivalTime,//время прибытия
 		* departTime;//время отправления
 
-	Train();
-	Train(const Train& train);
-
+	
 	void setRWnum(int rwnum);
 	int getRWnum();
 

@@ -2,16 +2,16 @@
 
 std::istream& operator>>(std::istream& in, ElectricTrain& Etrain)
 {
-
-    in >> *(Etrain.passengerNum);
-    in >> *(Etrain.numOfStops);
-    in >> *(Etrain.IsHigh_speed);
-
+    
     in >> *(Etrain.depart);
     in >> *(Etrain.arrival);
     in >> *(Etrain.arrivalTime);
     in >> *(Etrain.departTime);
 
+    in >> *(Etrain.passengerNum);
+    in >> *(Etrain.numOfStops);
+    in >> *(Etrain.IsHigh_speed);
+    
     return in;
 }
 
@@ -52,17 +52,17 @@ ElectricTrain::ElectricTrain()
 ElectricTrain::ElectricTrain(const ElectricTrain& train)
 {
 
-    depart = train.depart;
-    arrival = train.arrival;
+   depart = new string(*train.depart);
+   arrival = new string(*train.arrival);
 
-    arrivalTime = train.arrivalTime;
-    departTime = train.departTime;
+    arrivalTime = new Time(*train.arrivalTime);
+    departTime = new Time(*train.departTime);
 
-    railwayNum = train.railwayNum;
-    passengerNum = train.passengerNum;
-    numOfStops = train.numOfStops;
+   railwayNum = new int(*train.railwayNum);
+   passengerNum = new int(*train.passengerNum);
+   numOfStops = new int(*train.numOfStops);
 
-    IsHigh_speed = train.IsHigh_speed;
+    IsHigh_speed = new bool(*train.IsHigh_speed);
 
 }
 
@@ -87,4 +87,23 @@ bool ElectricTrain::operator>(const ElectricTrain& train)
 {
     return
         train.arrivalTime > arrivalTime;
+}
+
+ElectricTrain& ElectricTrain::operator=(const ElectricTrain& obj)
+{
+
+    *depart = *obj.depart;
+    *arrival = *obj.arrival;
+
+    *arrivalTime = *obj.arrivalTime;
+    *departTime = *obj.departTime;
+
+    *railwayNum = *obj.railwayNum;
+    *passengerNum = *obj.passengerNum;
+
+    *numOfStops = *obj.numOfStops;
+    *IsHigh_speed = *obj.IsHigh_speed;
+
+    return *this;
+
 }
